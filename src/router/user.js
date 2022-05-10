@@ -1,12 +1,8 @@
 import express from 'express';
-import { dbConnection } from '../config/connectDB';
+import userController from '../controller/user';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  const [rows] = await dbConnection.execute('SELECT * FROM `tbl_user`');
-
-  res.json(rows)
-});
+router.get('/', userController.getUserData);
 
 export default router;
