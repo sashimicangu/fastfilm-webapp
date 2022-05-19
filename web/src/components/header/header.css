@@ -1,0 +1,34 @@
+.header {
+  background-color: black;
+  width: 100vw;
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 64px;
+}
+
+.header-logo {
+  text-decoration: none;
+  font-size: 30px;
+  color: #fac261;
+  font-weight: 800;
+  margin-right: 20px;
+  /* font-family: 'inter', sans-serif; */
+}
+
+.header-right {
+  margin-right: 64px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
