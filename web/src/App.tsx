@@ -5,6 +5,8 @@ import WebFont from 'webfontloader';
 
 function App() {
   useEffect(() => {
+    document.title = 'FstFilm'
+
     WebFont.load({
       google: {
         families: ['inter', 'Droid Sans'],

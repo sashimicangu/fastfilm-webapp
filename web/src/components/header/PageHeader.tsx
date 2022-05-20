@@ -42,13 +42,13 @@ const PageHeader = () => {
       <section className="header-left">
         <section className="header-left__logo">
           <a href="/" className="header-logo">
-            LOGO
+            FST<a style={{ color: 'white' }}>FILM</a>
           </a>
         </section>
         <section className="header-left__nav">
           {Object.values(HEADER_TAB).map((tab) => (
             <ButtonHeader
-              isSeleted={tab.id == isSelected}
+              isSeleted={tab.id === isSelected}
               title={tab.name}
               onClick={() => setIsSelected(tab.id)}
             />
@@ -58,8 +58,18 @@ const PageHeader = () => {
       </section>
       <section className="header-right">
         <section className="header-right__nav">
-          <Search style={{cursor: 'pointer', marginRight: 20}} color="white" width={25} height={25} />
-          <User style={{cursor: 'pointer'}} color="white" width={25} height={25} />
+          <Search
+            style={{ cursor: 'pointer', marginRight: 20 }}
+            color="white"
+            width={25}
+            height={25}
+          />
+          <User
+            style={{ cursor: 'pointer' }}
+            color="white"
+            width={25}
+            height={25}
+          />
         </section>
       </section>
     </div>
