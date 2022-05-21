@@ -2,23 +2,32 @@ import React, { useEffect } from 'react';
 import './App.css';
 import PageHeader from './components/header/PageHeader';
 import WebFont from 'webfontloader';
+import AppNavigator from './navigation';
+import styled from 'styled-components';
 
-function App() {
-  useEffect(() => {
-    document.title = 'FstFilm'
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column
+`;
 
-    WebFont.load({
-      google: {
-        families: ['inter', 'Droid Sans'],
-      },
-    });
-  });
+const App = () => {
+  // useEffect(() => {
+  //   document.title = 'FstFilm - Home';
+
+  //   WebFont.load({
+  //     google: {
+  //       families: ['inter', 'Droid Sans'],
+  //     },
+  //   });
+  // });
 
   return (
-    <div className="app">
-      <PageHeader />
-    </div>
+    <Wrapper>
+      <AppNavigator />
+    </Wrapper>
   );
-}
+};
 
 export default App;

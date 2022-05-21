@@ -1,6 +1,5 @@
 .header {
   background-color: black;
-  width: 100vw;
   height: 64px;
   display: flex;
   flex-direction: row;
@@ -19,7 +18,7 @@
 .header-logo {
   text-decoration: none;
   font-size: 30px;
-  color: #fac261;
+  color: #EEB76B;
   font-weight: 800;
   margin-right: 20px;
   /* font-family: 'inter', sans-serif; */

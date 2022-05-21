@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.2"
+  },
+  "dependencies": {
+    "react-responsive-carousel": "^3.2.23",
+    "swiper": "^8.1.5"
+  }
+}

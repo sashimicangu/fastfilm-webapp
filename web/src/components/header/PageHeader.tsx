@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { HEADER_TAB } from '../../config';
-// import { PersonIcon,  } from '@radix-ui/react-icons';
 import { User, Search } from 'react-feather';
 import './header.css';
+import { useNavigate } from 'react-router-dom';
 
 const Button = styled.a`
   color: white;
@@ -25,7 +25,7 @@ const ButtonHeader = ({
 }: ButtonHeaderProps) => {
   return (
     <Button
-      style={{ color: isSeleted ? '#fac261' : 'white' }}
+      style={{ color: isSeleted ? '#EEB76B' : 'white' }}
       children={title}
       onClick={onClick}
     />
@@ -33,7 +33,9 @@ const ButtonHeader = ({
 };
 
 const PageHeader = () => {
-  const [isSelected, setIsSelected] = useState<number>(0);
+  const navigate = useNavigate();
+
+  const [isSelected, setIsSelected] = useState<number | null>(0);
 
   useEffect(() => {}, [isSelected]);
 
@@ -42,7 +44,7 @@ const PageHeader = () => {
       <section className="header-left">
         <section className="header-left__logo">
           <a href="/" className="header-logo">
-            FST<a style={{ color: 'white' }}>FILM</a>
+            FSTFILM
           </a>
         </section>
         <section className="header-left__nav">
@@ -50,15 +52,21 @@ const PageHeader = () => {
             <ButtonHeader
               isSeleted={tab.id === isSelected}
               title={tab.name}
-              onClick={() => setIsSelected(tab.id)}
+              onClick={() => {
+                setIsSelected(tab.id);
+                navigate(tab.path);
+              }}
             />
           ))}
-          {/* <PersonIcon color="white" width={25} height={25} /> */}
         </section>
       </section>
       <section className="header-right">
         <section className="header-right__nav">
           <Search
+            onClick={() => {
+              setIsSelected(null);
+              navigate('/search');
+            }}
             style={{ cursor: 'pointer', marginRight: 20 }}
             color="white"
             width={25}
