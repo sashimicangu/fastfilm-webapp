@@ -26,8 +26,6 @@ const insertMovie = async (req, res) => {
     trailer,
   } = req.body;
 
-  console.log('here');
-
   await new Movie({
     name,
     subtitle,
@@ -44,11 +42,24 @@ const insertMovie = async (req, res) => {
 
   res.status(200).json({
     code: 1,
-    message: 'Thành công'
-  })
+    message: 'Thành công',
+  });
+};
+
+const getMovieDetail = async (req, res) => {
+  const id = req.params.id;
+
+  const movie = await Movie.findById(id).exec();
+
+  res.status(200).json({
+    code: 1,
+    message: 'Thành công',
+    data: movie,
+  });
 };
 
 export default {
   getAllMovie,
   insertMovie,
+  getMovieDetail,
 };
