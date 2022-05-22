@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 
@@ -6,12 +7,15 @@ interface FilmItemProps {
   imgUrl: string;
   title: string;
   subtitle: string;
+  item: any;
   style?: any;
 }
 
 const FilmItem = (props: FilmItemProps) => {
-  const { imgUrl, title, subtitle, style } = props;
+  const { imgUrl, title, subtitle, style, item } = props;
   const { width, height } = useWindowDimensions();
+
+  const navigate = useNavigate();
 
   const Image = styled.img`
     width: ${(width - 400 - 12 * 4) / 5}px;
@@ -28,10 +32,17 @@ const FilmItem = (props: FilmItemProps) => {
     color: #dbdbdb;
   `;
 
+  const onClick = () => {
+    navigate(`/movie/${item._id}`);
+  };
+
   return (
     <div style={style}>
-      <Image src={imgUrl} alt="" />
-      <h3 style={{ width: (width - 400 - 12 * 4) / 5, overflow: 'hidden' }} className="title">
+      <Image onClick={onClick} src={imgUrl} alt="" />
+      <h3
+        style={{ width: (width - 400 - 12 * 4) / 5, overflow: 'hidden' }}
+        className="title"
+      >
         <Title href="">{title}</Title>
       </h3>
       <h3 style={{ maxWidth: (width - 400 - 12 * 4) / 5 }} className="subtitle">

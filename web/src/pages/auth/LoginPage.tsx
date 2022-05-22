@@ -65,6 +65,7 @@ const LoginPage = () => {
             <Field
               id="pass"
               name="pass"
+              type="password"
               placeholder="Nhập mật khẩu"
               className={'login-form__input'}
             />

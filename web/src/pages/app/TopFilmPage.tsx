@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   background: black;
   min-height: 100vh;
   padding-top: 50px;
+  padding-bottom: 100px;
 `;
 
 const RowWrapper = styled.div`
@@ -33,6 +34,7 @@ function TopFilmPage() {
           {!!listFilm.length &&
             listFilm.map((item) => (
               <FilmItem
+                item={item}
                 imgUrl={item?.image}
                 title={item?.name}
                 subtitle={item?.subtitle}

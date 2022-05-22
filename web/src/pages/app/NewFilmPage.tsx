@@ -26,6 +26,7 @@ function NewFilmPage() {
             .fill({})
             .map((item) => (
               <FilmItem
+                item={item}
                 imgUrl=""
                 title="Tình Yêu, Cái Chết và Người Máy"
                 subtitle="Love, Death & Robots"

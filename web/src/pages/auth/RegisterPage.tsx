@@ -73,6 +73,7 @@ const RegisterPage = () => {
             <Field
               id="pass"
               name="pass"
+              type="password"
               placeholder="Nhập mật khẩu"
               className={'register-form__input'}
             />

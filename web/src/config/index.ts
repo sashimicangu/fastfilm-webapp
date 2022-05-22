@@ -2,7 +2,7 @@ export const HEADER_TAB = {
   HOME: { id: 0, name: 'Trang chủ', path: '/' },
   HOT: { id: 1, name: 'Phim Hot', path: '/top' },
   NEW: { id: 2, name: 'Phim mới', path: '/new' },
-  BROWSE: { id: 3, name: 'Thể loại', path: '/browse' },
+  // BROWSE: { id: 3, name: 'Thể loại', path: '/browse' },
 };
 
 export const ROUTER_PATH = {
@@ -12,7 +12,8 @@ export const ROUTER_PATH = {
   BROWSE: '/browse',
   NEW: '/new',
   ACCOUNT: '/account',
-  COLLECTION: '/collection'
+  COLLECTION: '/collection',
+  MOVIE_DETAIL: '/movie/:id'
 }
 
 export const BASE_URL = 'http://localhost:8080/api/'
