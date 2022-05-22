@@ -1,6 +1,8 @@
 import React from 'react';
 import { ROUTER_PATH } from '../config/index';
+import AccountPage from '../pages/app/AccountPage';
 import BrowseFilmPage from '../pages/app/BrowseFilmPage';
+import CollectionPage from '../pages/app/CollectionPage';
 import HomePage from '../pages/app/HomePage';
 import NewFilmPage from '../pages/app/NewFilmPage';
 import SearchPage from '../pages/app/SearchPage';
@@ -29,6 +31,8 @@ const appRoutes: Array<RouteProps> = [
     component: NewFilmPage,
   },
   { path: ROUTER_PATH.BROWSE, component: BrowseFilmPage },
+  { path: ROUTER_PATH.ACCOUNT, component: AccountPage },
+  { path: ROUTER_PATH.COLLECTION, component: CollectionPage },
 ];
 
 export { appRoutes };

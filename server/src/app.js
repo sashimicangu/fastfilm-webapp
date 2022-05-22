@@ -5,14 +5,14 @@ import morgan from 'morgan';
 import fs from 'fs';
 import path from 'path';
 
-import { aboutRouter, userRouter } from './router';
+import { homeRouter, authRouter, movieRouter, userRouter } from './router';
 import { ROUTE_PATH } from './config';
 import { connectDB } from './config/connectDB';
 
 const app = express();
 const router = express.Router();
 const PORT = 8080 || process.env.PORT;
-const { USER, ABOUT } = ROUTE_PATH;
+const { USER, HOME, AUTH, MOVIE } = ROUTE_PATH;
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, 'logger.log'),
   { flags: 'a' }
@@ -35,7 +35,9 @@ router.use(express.static('./src/public'));
 // routes
 const routes = {
   [USER]: userRouter,
-  [ABOUT]: aboutRouter,
+  [HOME]: homeRouter,
+  [AUTH]: authRouter,
+  [MOVIE]: movieRouter,
 };
 
 // web routes

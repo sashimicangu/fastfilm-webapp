@@ -1,4 +1,6 @@
 export const ROUTE_PATH = {
   USER: 'user',
-  ABOUT: 'about'
+  HOME: 'home',
+  AUTH: 'auth',
+  MOVIE: 'movie'
 }

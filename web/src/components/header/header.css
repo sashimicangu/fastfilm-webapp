@@ -44,12 +44,12 @@
   position: relative;
 }
 
-.header-right__modal-nonsignup {
+.header-right__modal-btn {
   height: 50px;
   z-index: 999;
 }
 
-.header-right__modal-nonsignup > a {
+.header-right__modal-btn > a {
   text-decoration: none;
   color: #eaeaea;
   font-weight: 500;
@@ -60,7 +60,7 @@
 .header-right__modal {
   outline: none;
   width: 200px;
-  height: 100px;
+  /* height: 100px; */
   padding-left: 20px;
   position: absolute;
   background: #141415;

@@ -1,22 +1,17 @@
 import { Fragment, useLayoutEffect } from 'react';
-// import Cookie from 'js-cookie';
 import PageHeader from '../components/header/PageHeader';
 import styled from 'styled-components';
+import { Navigate } from 'react-router-dom';
 
 interface PrivateRouteProps {
   children: JSX.Element;
 }
 
-const Wrapper = styled.div`
-  // background: black;
-  // height: 100vh;
-  // width: 100%;
-  // padding: 0 200px;
-`;
+const Wrapper = styled.div``;
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
-  // const auth = isAuth()
-  // if (!auth) return <Navigate to={'/'} />;
+  // const token = localStorage.getItem('token')
+  // if (!token) return <Navigate to={'/'} />;
 
   return <Wrapper>{children}</Wrapper>;
 };

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { HEADER_TAB } from '../../config';
+import { BASE_URL, HEADER_TAB } from '../../config';
 import { User, Search } from 'react-feather';
 import './header.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReactModal from 'react-modal';
+import { useUserStore } from '../../store';
+import axios from 'axios';
+import { showToast } from '../../utils/funcUtils';
 
 const Button = styled.a`
   color: white;
@@ -37,6 +40,9 @@ const PageHeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const userData = useUserStore((state) => state.user);
+  const updateUserData = useUserStore((state) => state.updateUserData);
+
   const getCurrentLocation = () => {
     const currentTab = Object.values(HEADER_TAB).find(
       (tab) => tab.path == location.pathname
@@ -60,6 +66,21 @@ const PageHeader = () => {
     scrollTop >= 64
       ? header!.classList.add('is-sticky')
       : header!.classList.remove('is-sticky');
+  };
+
+  const onLogout = () => {
+    axios.delete(`${BASE_URL}auth/logout`).then((res) => {
+      localStorage.removeItem('token');
+      updateUserData({
+        email: '',
+        name: '',
+        token: null,
+        isLogin: false,
+      });
+      navigate('/')
+      showToast('Đã đăng xuất tài khoản')
+      setIsShowModal(false);
+    });
   };
 
   useEffect(() => {
@@ -118,12 +139,28 @@ const PageHeader = () => {
             overlayClassName={'header-right__modal-overlay'}
             parentSelector={() => document.querySelector('.header-right__nav')!}
           >
-            <h3 className="header-right__modal-nonsignup">
-              <a href="/login">Đăng nhập</a>
-            </h3>
-            <h3 className="header-right__modal-nonsignup">
-              <a href="/register">Đăng ký</a>
-            </h3>
+            {!userData.isLogin ? (
+              <Fragment>
+                <h3 className="header-right__modal-btn">
+                  <a href="/login">Đăng nhập</a>
+                </h3>
+                <h3 className="header-right__modal-btn">
+                  <a href="/register">Đăng ký</a>
+                </h3>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <h3 className="header-right__modal-btn">
+                  <a href="/account">Tài khoản</a>
+                </h3>
+                <h3 className="header-right__modal-btn">
+                  <a href="/collection">Bộ sưu tập</a>
+                </h3>
+                <h3 onClick={onLogout} className="header-right__modal-btn">
+                  <a href="#">Đăng xuất</a>
+                </h3>
+              </Fragment>
+            )}
           </ReactModal>
         </section>
       </section>

@@ -6,16 +6,8 @@ interface FilmItemProps {
   imgUrl: string;
   title: string;
   subtitle: string;
-  style?: any
+  style?: any;
 }
-
-const Title = styled.a`
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 400;
-  color: #dbdbdb
-`;
 
 const FilmItem = (props: FilmItemProps) => {
   const { imgUrl, title, subtitle, style } = props;
@@ -24,20 +16,28 @@ const FilmItem = (props: FilmItemProps) => {
   const Image = styled.img`
     width: ${(width - 400 - 12 * 4) / 5}px;
     aspect-ratio: 114/169;
-    cursor: pointer
+    cursor: pointer;
+  `;
+
+  const Title = styled.a`
+    width: ${(width - 400 - 12 * 4) / 5}px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: #dbdbdb;
   `;
 
   return (
     <div style={style}>
-      <Image
-        src="https://image.tmdb.org/t/p/w342/cRiDlzzZC5lL7fvImuSjs04SUIJ.jpg"
-        alt=""
-      />
-      <h3 className="title">
+      <Image src={imgUrl} alt="" />
+      <h3 style={{ width: (width - 400 - 12 * 4) / 5, overflow: 'hidden' }} className="title">
         <Title href="">{title}</Title>
       </h3>
-      <h3 className="subtitle">
-        <Title style={{color: '#7a7a7a'}} href="">{subtitle}</Title>
+      <h3 style={{ maxWidth: (width - 400 - 12 * 4) / 5 }} className="subtitle">
+        <Title style={{ color: '#7a7a7a' }} href="">
+          {subtitle}
+        </Title>
       </h3>
     </div>
   );

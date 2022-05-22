@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import { Formik, Field, Form } from 'formik';
 
 import './styles/login.css';
+import axios from 'axios';
+import { BASE_URL } from '../../config';
+import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '../../store';
+import { toast } from 'react-toastify';
+import { showToast } from '../../utils/funcUtils';
 
 const Wrapper = styled.div`
   height: 900px;
@@ -14,7 +20,31 @@ const Wrapper = styled.div`
 `;
 
 const LoginPage = () => {
-  const onSubmit = () => {};
+  const navigate = useNavigate();
+
+  const updateUserData = useUserStore((state) => state.updateUserData);
+
+  const onSubmit = (values: any) => {
+    axios
+      .post(`${BASE_URL}auth/login`, {
+        email: values.email,
+        password: values.pass,
+      })
+      .then((res) => {
+        if (!!res.data.token) {
+          localStorage.setItem('token', JSON.stringify(res.data.token));
+          updateUserData({
+            email: res.data.data.email,
+            name: res.data.data.name,
+            token: res.data.token,
+            isLogin: true,
+            createAt: res.data.data.createAt
+          });
+          showToast('Đăng nhập thành công')
+          navigate('/');
+        }
+      });
+  };
 
   return (
     <Wrapper>
@@ -44,7 +74,7 @@ const LoginPage = () => {
           </Form>
         </Formik>
 
-        <h3 className='login-form__policy'>
+        <h3 className="login-form__policy">
           Bằng việc đăng nhập, quý khách đã đồng ý thực hiện mọi giao dịch theo
           Điều khoản sử dụng và Chính sách bảo mật của FSTFILM
         </h3>

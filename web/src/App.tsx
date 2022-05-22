@@ -3,6 +3,9 @@ import './App.css';
 import WebFont from 'webfontloader';
 import AppNavigator from './navigation';
 import styled from 'styled-components';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Wrapper = styled.div`
   // width: 100vw;
@@ -16,6 +19,7 @@ const App = () => {
   return (
     <Wrapper>
       <AppNavigator />
+      <ToastContainer />
     </Wrapper>
   );
 };

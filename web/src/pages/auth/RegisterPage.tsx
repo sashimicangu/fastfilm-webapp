@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import { Formik, Field, Form } from 'formik';
 
 import './styles/register.css';
+import axios from 'axios';
+import { BASE_URL } from '../../config';
+import { showToast } from '../../utils/funcUtils';
+import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '../../store';
+import moment from 'moment';
 
 const Wrapper = styled.div`
   height: 900px;
@@ -14,8 +20,30 @@ const Wrapper = styled.div`
 `;
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+  const updateUserData = useUserStore((state) => state.updateUserData);
+
   const onSubmit = async (values: any) => {
-    console.log(JSON.stringify(values))
+    axios
+    .post(`${BASE_URL}auth/register`, {
+      email: values.email,
+      name: values.name,
+      password: values.pass,
+    })
+    .then((res) => {
+      if (!!res.data.token) {
+        localStorage.setItem('token', JSON.stringify(res.data.token));
+        updateUserData({
+          email: res.data.data.email,
+          name: res.data.data.name,
+          token: res.data.token,
+          isLogin: true,
+          createAt: moment()
+        });
+        showToast('Đăng ký thành công')
+        navigate('/');
+      }
+    });
   };
 
   return (
