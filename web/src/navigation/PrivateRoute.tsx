@@ -1,5 +1,5 @@
 import { Fragment, useLayoutEffect } from 'react';
-import Cookie from 'js-cookie';
+// import Cookie from 'js-cookie';
 import PageHeader from '../components/header/PageHeader';
 import styled from 'styled-components';
 
