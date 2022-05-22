@@ -2,6 +2,31 @@ import { dbConnection } from '../config/connectDB';
 import Movie from '../model/Movie';
 
 const getAllMovie = async (req, res) => {
+  const sort = req.query.sort;
+  const search = req.query.search;
+
+  if (!!search) {
+    let movies = await Movie.find({}).exec();
+
+    movies = movies.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+
+    return res.status(200).json({
+      code: 1,
+      message: 'Thành công',
+      data: movies,
+    });
+  }
+
+  if (!!sort && sort == 1) {
+    const movies = await Movie.find({}).sort({ premiere: -1 }).exec();
+
+    return res.status(200).json({
+      code: 1,
+      message: 'Thành công',
+      data: movies,
+    });
+  }
+
   const movies = await Movie.find({});
 
   res.status(200).json({

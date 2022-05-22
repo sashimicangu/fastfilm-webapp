@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import FilmItem from '../../components/FilmItem';
+import { BASE_URL } from '../../config';
 
 const Wrapper = styled.div`
   background: black;
-  // height: 100vh;
-  padding-top: 50px
+  min-height: 100vh;
+  padding-top: 50px;
+  padding-bottom: 100px;
 `;
 
 const RowWrapper = styled.div`
@@ -16,20 +19,25 @@ const RowWrapper = styled.div`
 `;
 
 function NewFilmPage() {
-  useEffect(() => {}, []);
+  const [listFilm, setListFilm] = useState<Array<any>>([]);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}movie`, { params: { sort: 1 } }).then((res) => {
+      setListFilm(res.data.data);
+    });
+  }, []);
 
   return (
     <Wrapper>
       <section className="home-new__section">
         <RowWrapper>
-          {Array(20)
-            .fill({})
-            .map((item) => (
+          {!!listFilm.length &&
+            listFilm.map((item) => (
               <FilmItem
                 item={item}
-                imgUrl=""
-                title="Tình Yêu, Cái Chết và Người Máy"
-                subtitle="Love, Death & Robots"
+                imgUrl={item?.image}
+                title={item?.name}
+                subtitle={item?.subtitle}
                 style={{ marginBottom: 15 }}
               />
             ))}
