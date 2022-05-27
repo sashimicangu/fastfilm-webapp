@@ -20,10 +20,11 @@ const Wrapper = styled.div`
 `;
 
 const RowWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  // flex-direction: row;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
 `;
 
 function SearchPage() {
@@ -62,7 +63,7 @@ function SearchPage() {
                 imgUrl={item?.image}
                 title={item?.name}
                 subtitle={item?.subtitle}
-                style={{ marginBottom: 15 }}
+                style={{ marginBottom: 15, marginRight: 5, marginLeft: 5 }}
               />
             ))}
         </RowWrapper>

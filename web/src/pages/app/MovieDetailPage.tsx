@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import moment from 'moment';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { BASE_URL } from '../../config';
@@ -22,7 +23,7 @@ const RowInfor = ({ left, right, top }: any) => {
           marginRight: 20,
           fontWeight: 400,
           fontSize: 16,
-          width: 100
+          width: 100,
         }}
       >
         {left}
@@ -37,15 +38,7 @@ function MovieDetailPage() {
 
   const [movieDetail, setMovieDetail] = useState<any>();
 
-  const getData = () => {
-    axios.get(`${BASE_URL}movie/${id}`).then((res) => {
-      setMovieDetail(res.data.data);
-    });
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const movieDetailDivRef = useRef<HTMLDivElement>(null);
 
   const Cover = styled.div`
     background-image: url('${movieDetail?.cover}');
@@ -55,6 +48,29 @@ function MovieDetailPage() {
     position: relative;
   `;
 
+  const getData = () => {
+    axios.get(`${BASE_URL}movie/${id}`).then((res) => {
+      setMovieDetail(res.data.data);
+    });
+  };
+
+  useEffect(() => {
+    movieDetailDivRef.current?.scrollIntoView();
+    getData();
+  }, []);
+
+  const renderCategorySection = () => {
+    return (
+      <div className='movie-category__section'>
+        {movieDetail?.category?.map((item: any) => (
+          <div className='movie-category'>
+            <h4>{item.name}</h4>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <Wrapper>
       <Cover />
@@ -62,15 +78,22 @@ function MovieDetailPage() {
         <div className="movie-image__wrapper">
           <img className="movie-image" src={movieDetail?.image} alt="" />
         </div>
-        <div className="movie-infor">
+        <div ref={movieDetailDivRef} className="movie-infor">
           <h3 className="movie-infor__name">{movieDetail?.name}</h3>
           <h3 className="movie-infor__subtitle">{movieDetail?.subtitle}</h3>
-          <RowInfor left={'ĐẠO DIỄN'} right={movieDetail?.author} top={40} />
+          {renderCategorySection()}
+          <RowInfor left={'ĐẠO DIỄN'} right={movieDetail?.author} top={25} />
           <RowInfor left={'QUỐC GIA'} right={movieDetail?.region} top={10} />
-          <RowInfor left={'KHỞI CHIẾU'} right={movieDetail?.author} top={10} />
+          <RowInfor
+            left={'KHỞI CHIẾU'}
+            right={moment(movieDetail?.premiere).format('DD/MM/YYYY')}
+            top={10}
+          />
           <h3 className="movie-infor__desc">{movieDetail?.description}</h3>
-          <h3 className="movie-infor__desc" style={{fontWeight: 500}}>Trailer</h3>
-          <img className="movie-trailer"  src={movieDetail?.trailer} alt="" />
+          <h3 className="movie-infor__desc" style={{ fontWeight: 500 }}>
+            Trailer
+          </h3>
+          <img className="movie-trailer" src={movieDetail?.trailer} alt="" />
         </div>
       </div>
     </Wrapper>

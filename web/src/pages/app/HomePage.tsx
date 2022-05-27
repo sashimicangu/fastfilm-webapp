@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import { ChevronRight } from 'react-feather';
 import axios from 'axios';
 import { BASE_URL } from '../../config';
+import { useNavigate } from 'react-router-dom';
 
 const Title = styled.h3`
   color: white;
@@ -32,12 +33,13 @@ const RowWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const RowTitle = ({ title }: { title: string }) => {
+const RowTitle = ({ title, onClick }: { title: string, onClick: () => void }) => {
   return (
     <div className="row-title__wrapper">
       <Title>{title}</Title>
       <div style={{ display: 'flex' }}>
         <div
+          onClick={onClick}
           style={{ display: 'flex', alignItems: 'center', alignSelf: 'end' }}
         >
           <a className="row-title__right" href="">
@@ -57,6 +59,8 @@ const RowTitle = ({ title }: { title: string }) => {
 
 const HomePage = () => {
   const [listFilm, setListFilm] = useState<Array<any>>([]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get(`${BASE_URL}movie`).then((res) => {
@@ -96,7 +100,7 @@ const HomePage = () => {
         </Swiper>
       </section>
       <section className="home-new__section">
-        <RowTitle title="Phim đang thịnh hành" />
+        <RowTitle title="Phim đang thịnh hành" onClick={() => navigate('/top')} />
         <RowWrapper>
           {listFilm.map((item) => (
             <FilmItem
@@ -110,7 +114,7 @@ const HomePage = () => {
         </RowWrapper>
       </section>
       <section className="home-new__section">
-        <RowTitle title="Phim mới cập nhật" />
+        <RowTitle title="Phim mới cập nhật" onClick={() => navigate('/new')} />
         <RowWrapper>
           {listFilm.map((item) => (
             <FilmItem

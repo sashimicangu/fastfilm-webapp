@@ -10,7 +10,6 @@ const register = async (req, res) => {
   const { email, name, password } = req.body;
 
   let user = await User.findOne({ email }).exec();
-  console.log(user);
 
   if (user) {
     return res.status(200).json({
@@ -25,7 +24,7 @@ const register = async (req, res) => {
   await new User({ email, password: hashedPassword, name }).save();
 
   const accessToken = await JWT.sign({ email }, process.env.JWT_KEY, {
-    expiresIn: '1m',
+    // expiresIn: '20m',
   });
 
   res.status(200).json({
@@ -55,13 +54,13 @@ const login = async (req, res) => {
   }
 
   // Send JWT access token
-  const accessToken = await JWT.sign({ email }, process.env.JWT_KEY, {
-    expiresIn: '1m',
+  const accessToken = JWT.sign({ email }, process.env.JWT_KEY, {
+    // expiresIn: '20m',
   });
 
   // Refresh token
-  const refreshToken = await JWT.sign({ email }, process.env.REFRESH_JWT_KEY, {
-    expiresIn: '5m',
+  const refreshToken = JWT.sign({ email }, process.env.REFRESH_JWT_KEY, {
+    expiresIn: '7d',
   });
 
   res.json({
@@ -73,10 +72,16 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  const refreshToken = req.header('x-auth-token');
+  const refreshToken = req.header('x-auth-token'); // lay token tu header
 
+  // xoa token vua lay duoc
   refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
-  res.sendStatus(204);
+
+  // phan hoi lai client
+  res.status(200).json({
+    code: 1,
+    message: 'Thành công'
+  });
 };
 
 export default {

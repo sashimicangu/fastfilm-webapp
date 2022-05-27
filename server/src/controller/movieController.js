@@ -1,4 +1,5 @@
 import { dbConnection } from '../config/connectDB';
+import Category from '../model/Category';
 import Movie from '../model/Movie';
 
 const getAllMovie = async (req, res) => {
@@ -8,7 +9,9 @@ const getAllMovie = async (req, res) => {
   if (!!search) {
     let movies = await Movie.find({}).exec();
 
-    movies = movies.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    movies = movies.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
 
     return res.status(200).json({
       code: 1,
@@ -17,7 +20,9 @@ const getAllMovie = async (req, res) => {
     });
   }
 
+  // top phim
   if (!!sort && sort == 1) {
+    // loc theo truong premiere
     const movies = await Movie.find({}).sort({ premiere: -1 }).exec();
 
     return res.status(200).json({
@@ -74,7 +79,17 @@ const insertMovie = async (req, res) => {
 const getMovieDetail = async (req, res) => {
   const id = req.params.id;
 
-  const movie = await Movie.findById(id).exec();
+  let movie = await Movie.findById(id).exec();
+  movie = movie.toObject();
+  let categoryIdList = movie.category.split(',');
+
+  let categoryList = [];
+  for (let value of categoryIdList) {
+    let category = await Category.findOne({ id: value }).exec();
+    categoryList.push(category);
+  }
+
+  movie.category = categoryList;
 
   res.status(200).json({
     code: 1,

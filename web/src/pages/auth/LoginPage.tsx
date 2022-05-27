@@ -25,6 +25,8 @@ const LoginPage = () => {
   const updateUserData = useUserStore((state) => state.updateUserData);
 
   const onSubmit = (values: any) => {
+    console.log('here')
+
     axios
       .post(`${BASE_URL}auth/login`, {
         email: values.email,
