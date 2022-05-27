@@ -3,6 +3,7 @@ import Category from '../model/Category';
 import Movie from '../model/Movie';
 
 const getAllMovie = async (req, res) => {
+  const hot = req.query.hot;
   const sort = req.query.sort;
   const search = req.query.search;
 
@@ -30,6 +31,16 @@ const getAllMovie = async (req, res) => {
       message: 'Thành công',
       data: movies,
     });
+  }
+
+  if (!!hot && hot == 1) {
+    let movies = await Movie.find({});
+
+    movies = movies.filter((movie) => movie.toObject().rating >= 7);
+
+    return res
+      .status(200)
+      .json({ code: 1, message: 'Thành công', data: movies });
   }
 
   const movies = await Movie.find({});

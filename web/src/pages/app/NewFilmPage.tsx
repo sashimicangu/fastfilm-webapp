@@ -12,10 +12,12 @@ const Wrapper = styled.div`
 `;
 
 const RowWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
 `;
 
 function NewFilmPage() {

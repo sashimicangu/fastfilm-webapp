@@ -12,17 +12,18 @@ const Wrapper = styled.div`
 `;
 
 const RowWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  // flex-direction: row;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
 `;
 
 function TopFilmPage() {
   const [listFilm, setListFilm] = useState<Array<any>>([]);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}movie`).then((res) => {
+    axios.get(`${BASE_URL}movie`, { params: { hot: 1 } }).then((res) => {
       setListFilm(res.data.data);
     });
   }, []);

@@ -19,6 +19,8 @@ let dbConnection;
 //   }
 // };
 
+
+// ket noi database
 const connectDB = async (prg) => {
   console.log('Connecting to DB...');
   try {
