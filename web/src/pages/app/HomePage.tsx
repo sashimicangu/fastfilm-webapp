@@ -33,7 +33,13 @@ const RowWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const RowTitle = ({ title, onClick }: { title: string, onClick: () => void }) => {
+const RowTitle = ({
+  title,
+  onClick,
+}: {
+  title: string;
+  onClick: () => void;
+}) => {
   return (
     <div className="row-title__wrapper">
       <Title>{title}</Title>
@@ -58,18 +64,18 @@ const RowTitle = ({ title, onClick }: { title: string, onClick: () => void }) =>
 };
 
 const HomePage = () => {
-  const [listFilm, setListFilm] = useState<Array<any>>([]);
+  const [listFilm, setListFilm] = useState<any>({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${BASE_URL}movie`).then((res) => {
+    axios.get(`${BASE_URL}home`).then((res) => {
       setListFilm(res.data.data);
     });
   }, []);
 
   const renderSwiperHomeRecommend = () => {
-    return listFilm.map((item, index) => (
+    return listFilm?.movies?.map((item: any, index: number) => (
       <SwiperSlide>
         <FilmItem
           item={item}
@@ -100,9 +106,12 @@ const HomePage = () => {
         </Swiper>
       </section>
       <section className="home-new__section">
-        <RowTitle title="Phim đang thịnh hành" onClick={() => navigate('/top')} />
+        <RowTitle
+          title="Phim đang thịnh hành"
+          onClick={() => navigate('/view')}
+        />
         <RowWrapper>
-          {listFilm.map((item) => (
+          {listFilm?.topViewMovies?.map((item: any, index: number) => (
             <FilmItem
               item={item}
               imgUrl={item?.image}
@@ -116,7 +125,7 @@ const HomePage = () => {
       <section className="home-new__section">
         <RowTitle title="Phim mới cập nhật" onClick={() => navigate('/new')} />
         <RowWrapper>
-          {listFilm.map((item) => (
+          {listFilm?.hotMovies?.map((item: any, index: number) => (
             <FilmItem
               item={item}
               imgUrl={item?.image}

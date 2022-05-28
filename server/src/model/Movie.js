@@ -16,6 +16,7 @@ const Movie = new Schema({
   trailer: String,
   createAt: { type: Date, default: Date.now },
   updateAt: { type: Date, default: Date.now },
+  view: Number
 });
 
 export default mongoose.model('Movie', Movie, 'movie');

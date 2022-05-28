@@ -21,7 +21,7 @@ const register = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  await new User({ email, password: hashedPassword, name }).save();
+  await new User({ email, password: hashedPassword, name, rank: 'Thành viên' }).save();
 
   const accessToken = await JWT.sign({ email }, process.env.JWT_KEY, {
     // expiresIn: '20m',
@@ -33,6 +33,7 @@ const register = async (req, res) => {
     data: {
       email,
       name,
+      rank: 'Thành viên'
     },
     token: accessToken,
   });

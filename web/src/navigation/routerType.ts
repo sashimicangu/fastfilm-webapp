@@ -8,6 +8,7 @@ import MovieDetailPage from '../pages/app/MovieDetailPage';
 import NewFilmPage from '../pages/app/NewFilmPage';
 import SearchPage from '../pages/app/SearchPage';
 import TopFilmPage from '../pages/app/TopFilmPage';
+import ViewPage from '../pages/app/ViewPage';
 
 interface RouteProps {
   path: string;
@@ -35,6 +36,7 @@ const appRoutes: Array<RouteProps> = [
   { path: ROUTER_PATH.ACCOUNT, component: AccountPage },
   { path: ROUTER_PATH.COLLECTION, component: CollectionPage },
   { path: ROUTER_PATH.MOVIE_DETAIL, component: MovieDetailPage },
+  { path: ROUTER_PATH.VIEW, component: ViewPage },
 ];
 
 export { appRoutes };

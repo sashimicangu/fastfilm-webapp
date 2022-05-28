@@ -8,6 +8,8 @@ const User = new Schema({
   password: String,
   createAt: { type: Date, default: Date.now },
   updateAt: { type: Date, default: Date.now },
+  rank: String,
+  dob: String
 });
 
 export default mongoose.model('User', User, 'user');

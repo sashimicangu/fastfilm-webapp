@@ -6,6 +6,7 @@ const getAllMovie = async (req, res) => {
   const hot = req.query.hot;
   const sort = req.query.sort;
   const search = req.query.search;
+  const view = req.query.view;
 
   if (!!search) {
     let movies = await Movie.find({}).exec();
@@ -25,6 +26,16 @@ const getAllMovie = async (req, res) => {
   if (!!sort && sort == 1) {
     // loc theo truong premiere
     const movies = await Movie.find({}).sort({ premiere: -1 }).exec();
+
+    return res.status(200).json({
+      code: 1,
+      message: 'Thành công',
+      data: movies,
+    });
+  }
+
+  if (!!view && view == 1) {
+    const movies = await Movie.find({}).where('view').gte(5000).exec();
 
     return res.status(200).json({
       code: 1,

@@ -25,7 +25,7 @@ const LoginPage = () => {
   const updateUserData = useUserStore((state) => state.updateUserData);
 
   const onSubmit = (values: any) => {
-    console.log('here')
+    console.log('here');
 
     axios
       .post(`${BASE_URL}auth/login`, {
@@ -34,15 +34,18 @@ const LoginPage = () => {
       })
       .then((res) => {
         if (!!res.data.token) {
+          console.log(res)
           localStorage.setItem('token', JSON.stringify(res.data.token));
           updateUserData({
             email: res.data.data.email,
             name: res.data.data.name,
             token: res.data.token,
             isLogin: true,
-            createAt: res.data.data.createAt
+            createAt: res.data.data.createAt,
+            rank: res.data.data.rank,
+            dob: res.data.data.dob,
           });
-          showToast('Đăng nhập thành công')
+          showToast('Đăng nhập thành công');
           navigate('/');
         }
       });

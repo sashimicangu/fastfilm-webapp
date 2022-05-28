@@ -75,6 +75,11 @@
   font-weight: 500;
 }
 
-.movie-category > h4:hover {
-  color: #eeb76b
+.movie-category:hover > h4 {
+  color: #eeb76b;
+}
+
+.imdb-icon {
+  display: inline-flex;
+  margin-right: 10px;
 }

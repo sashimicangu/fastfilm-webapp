@@ -1,17 +1,19 @@
 import Movie from '../model/Movie';
 
 const getHomeData = async (req, res) => {
-  // const [rows] = await dbConnection.execute('SELECT * FROM `tbl_user`');
-  let docs = await Movie.find({});
-  // docs = docs.map((doc) => {
-  //   return {
-  //     name: doc.name,
-  //     email: doc.email,
-  //     createAt: doc.createAt,
-  //     updateAt: doc.updateAt,
-  //   };
-  // });
-  res.json(docs);
+  let movies = await Movie.find({});
+  const hotMovies = await Movie.find({}).sort({ premiere: -1 }).exec();
+  const topViewMovies = await Movie.find({}).sort({ view: -1 }).exec();
+
+  res.status(200).json({
+    code: 1,
+    message: 'Thành công',
+    data: {
+      movies,
+      hotMovies,
+      topViewMovies,
+    },
+  });
 };
 
 export default {

@@ -38,7 +38,9 @@ const RegisterPage = () => {
           name: res.data.data.name,
           token: res.data.token,
           isLogin: true,
-          createAt: moment()
+          createAt: moment(),
+          rank: res.data.data.rank,
+          dob: null
         });
         showToast('Đăng ký thành công')
         navigate('/');

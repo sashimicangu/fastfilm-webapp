@@ -76,9 +76,11 @@ const PageHeader = () => {
         name: '',
         token: null,
         isLogin: false,
+        rank: null,
+        dob: null,
       });
-      navigate('/')
-      showToast('Đã đăng xuất tài khoản')
+      navigate('/');
+      showToast('Đã đăng xuất tài khoản');
       setIsShowModal(false);
     });
   };
@@ -155,6 +157,9 @@ const PageHeader = () => {
                 </h3>
                 <h3 className="header-right__modal-btn">
                   <a href="/collection">Bộ sưu tập</a>
+                </h3>
+                <h3 className="header-right__modal-btn">
+                  <a href="/collection">Đổi mật khẩu</a>
                 </h3>
                 <h3 onClick={onLogout} className="header-right__modal-btn">
                   <a href="#">Đăng xuất</a>
